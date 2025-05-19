@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Properties -->
+    <record id="demo_property_1" model="estate.property">
+        <field name="name">Sunrise Towers</field>
+        <field name="property_type">apartment</field>
+        <field name="address">Kappad Beach</field>
+        <field name="city">Miami</field>
+        <field name="zip">33139</field>
+    </record>
+
+    <record id="demo_property_2" model="estate.property">
+        <field name="name">Ajion's Villa</field>
+        <field name="property_type">villa</field>
+        <field name="address">Calicut Beach</field>
+        <field name="city">Calicut</field>
+        <field name="zip">65678</field>
+    </record>
+
+    <!-- Units -->
+    <record id="demo_unit_1" model="estate.unit">
+        <field name="name">PH-1001</field>
+        <field name="property_id" ref="demo_property_1"/>
+        <field name="unit_type">penthouse</field>
+        <field name="area">150</field>
+        <field name="bedrooms">3</field>
+        <field name="bathrooms">2</field>
+    </record>
+
+    <record id="demo_unit_2" model="estate.unit">
+        <field name="name">PH-1002</field>
+        <field name="property_id" ref="demo_property_2"/>
+        <field name="unit_type">penthouse</field>
+        <field name="area">151</field>
+        <field name="bedrooms">1</field>
+        <field name="bathrooms">2</field>
+    </record>
+
+    <!-- Tenants -->
+    <record id="demo_tenant_1" model="estate.tenant">
+        <field name="name">John Smith</field>
+        <field name="email">john.smith@example.com</field>
+        <field name="phone">+1 555 123 4567</field>
+    </record>
+
+    <record id="demo_tenant_2" model="estate.tenant">
+        <field name="name">Ajin C</field>
+        <field name="email">ajin.c@example.com</field>
+        <field name="phone">+1 343 341 4423</field>
+    </record>
+
+    <!-- Leases -->
+    <record id="demo_lease_1" model="estate.lease">
+        <field name="name">LEASE-001</field>
+        <field name="tenant_id" ref="demo_tenant_1"/>
+        <field name="unit_id" ref="demo_unit_1"/>
+        <field name="start_date">2025-06-01</field>
+        <field name="end_date">2026-05-31</field>
+        <field name="monthly_rent">2500.00</field>
+        <field name="deposit">5000.00</field>
+        <field name="payment_term">monthly</field>
+        <field name="payment_day">5</field>
+        <field name="state">active</field>
+        <field name="notes">Includes parking spot #12. No pets allowed.</field>
+    </record>
+
+    <record id="demo_lease_2" model="estate.lease">
+        <field name="name">LEASE-002</field>
+        <field name="tenant_id" ref="demo_tenant_2"/>
+        <field name="unit_id" ref="demo_unit_2"/>
+        <field name="start_date">2025-07-15</field>
+        <field name="end_date">2026-07-14</field>
+        <field name="monthly_rent">3200.00</field>
+        <field name="deposit">6400.00</field>
+        <field name="payment_term">quarterly</field>
+        <field name="payment_day">15</field>
+        <field name="state">active</field>
+        <field name="notes">Includes utilities. One small pet allowed with additional deposit.</field>
+    </record>
+
+    <!-- Draft Lease -->
+    <record id="demo_lease_3" model="estate.lease">
+        <field name="name">LEASE-003</field>
+        <field name="tenant_id" ref="demo_tenant_1"/>
+        <field name="unit_id" ref="demo_unit_1"/>
+        <field name="start_date">2026-06-01</field>
+        <field name="end_date">2027-05-31</field>
+        <field name="monthly_rent">2700.00</field>
+        <field name="deposit">5400.00</field>
+        <field name="payment_term">monthly</field>
+        <field name="payment_day">1</field>
+        <field name="state">draft</field>
+        <field name="notes">Renewal of LEASE-001 with increased rent.</field>
+
+    </record>
+
+    <!-- Expired Lease -->
+    <record id="demo_lease_4" model="estate.lease">
+        <field name="name">LEASE-004</field>
+        <field name="tenant_id" ref="demo_tenant_2"/>
+        <field name="unit_id" ref="demo_unit_2"/>
+        <field name="start_date">2024-01-01</field>
+        <field name="end_date">2024-12-31</field>
+        <field name="monthly_rent">3000.00</field>
+        <field name="deposit">6000.00</field>
+        <field name="payment_term">yearly</field>
+        <field name="payment_day">1</field>
+        <field name="state">expired</field>
+        <field name="notes">Previous tenant was a corporate client.</field>
+    </record>
+    <record id="demo_payment_1" model="estate.payment">
+        <field name="lease_id" ref="demo_lease_1"/>
+        <field name="amount">2500.00</field>
+        <field name="due_date">2025-06-05</field>
+        <field name="payment_date">2025-06-05</field>
+        <field name="state">paid</field>
+        <field name="payment_method">bank</field>
+        <field name="reference">BANK123456</field>
+    </record>
+
+    <record id="demo_payment_2" model="estate.payment">
+        <field name="lease_id" ref="demo_lease_2"/>
+        <field name="amount">9600.00</field>
+        <field name="due_date">2025-07-15</field>
+        <field name="state">pending</field>
+        <field name="payment_method">online</field>
+        <field name="reference">ONLINE8790</field>
+    </record>
+
+    <!-- Maintenance Requests -->
+    <record id="demo_maintenance_1" model="estate.maintenance">
+        <field name="name">MAINT-001</field>
+        <field name="lease_id" ref="demo_lease_1"/>
+        <field name="unit_id" ref="demo_unit_1"/>
+        <field name="request_date">2025-06-10</field>
+        <field name="completion_date">2025-06-12</field>
+        <field name="description">Leaking faucet in kitchen.</field>
+        <field name="priority">high</field>
+        <field name="state">completed</field>
+        <field name="assigned_to" ref="base.user_admin"/>
+        <field name="cost">50.00</field>
+        <field name="actual_cost">45.00</field>
+        <field name="notes">Fixed by plumber on 12th June.</field>
+    </record>
+
+    <record id="demo_maintenance_2" model="estate.maintenance">
+        <field name="name">MAINT-002</field>
+        <field name="lease_id" ref="demo_lease_2"/>
+        <field name="unit_id" ref="demo_unit_2"/>
+        <field name="request_date">2025-08-01</field>
+        <field name="description">Air conditioner not working properly.</field>
+        <field name="priority">urgent</field>
+        <field name="state">in_progress</field>
+        <field name="assigned_to" ref="base.user_admin"/>
+        <field name="cost">120.00</field>
+        <field name="notes">Technician scheduled for inspection.</field>
+    </record>
+</odoo>

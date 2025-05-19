@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_estate_property,estate.property,model_estate_property,,1,1,1,1
+access_estate_unit,estate.unit,model_estate_unit,,1,1,1,1
+access_estate_tenant,estate.tenant,model_estate_tenant,,1,1,1,1
+access_estate_lease,estate.lease,model_estate_lease,,1,1,1,1
+access_estate_payment,estate.payment,model_estate_payment,,1,1,1,1
+access_estate_maintenance,estate.maintenance,model_estate_maintenance,,1,1,1,1

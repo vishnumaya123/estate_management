@@ -1,0 +1,46 @@
+<odoo>
+    <record id="view_estate_unit_tree" model="ir.ui.view">
+        <field name="name">estate.unit.tree</field>
+        <field name="model">estate.unit</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="property_id"/>
+                <field name="unit_type"/>
+                <field name="status"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_estate_unit_form" model="ir.ui.view">
+        <field name="name">estate.unit.form</field>
+        <field name="model">estate.unit</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="property_id"/>
+                            <field name="unit_type"/>
+                            <field name="status"/>
+                        </group>
+                        <group>
+                            <field name="area"/>
+                            <field name="bedrooms"/>
+                            <field name="bathrooms"/>
+                        </group>
+                    </group>
+                    <field name="amenities"/>
+                    <field name="current_lease_id" widget="many2one"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_estate_unit" model="ir.actions.act_window">
+        <field name="name">Units</field>
+        <field name="res_model">estate.unit</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

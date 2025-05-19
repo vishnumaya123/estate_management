@@ -1,0 +1,9 @@
+<odoo>
+    <menuitem id="menu_estate_management_root" name="Estate Management" sequence="10"/>
+    <menuitem id="menu_estate_property" name="Properties" parent="menu_estate_management_root" action="action_estate_property"/>
+    <menuitem id="menu_estate_units" name="Units" parent="menu_estate_management_root" action="action_estate_unit"/>
+    <menuitem id="menu_estate_tenants" name="Tenants" parent="menu_estate_management_root" action="action_estate_tenant"/>
+    <menuitem id="menu_estate_leases" name="Leases" parent="menu_estate_management_root" action="action_estate_lease"/>
+    <menuitem id="menu_estate_payments" name="Payments" parent="menu_estate_management_root" action="action_estate_payment"/>
+    <menuitem id="menu_estate_maintenance" name="Maintenance" parent="menu_estate_management_root" action="action_estate_maintenance"/>
+</odoo>

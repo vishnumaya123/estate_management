@@ -1,0 +1,88 @@
+<odoo>
+    <record id="view_estate_lease_tree" model="ir.ui.view">
+        <field name="name">estate.lease.tree</field>
+        <field name="model">estate.lease</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="tenant_id"/>
+                <field name="unit_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="monthly_rent"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_estate_lease_form" model="ir.ui.view">
+        <field name="name">estate.lease.form</field>
+        <field name="model">estate.lease</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- Hidden fields used for controlling button visibility -->
+                    <field name="show_confirm_btn" invisible="1"/>
+                    <field name="show_expire_btn" invisible="1"/>
+                    <field name="show_renew_btn" invisible="1"/>
+                    <field name="show_cancel_btn" invisible="1"/>
+
+                    <button name="action_confirm" string="Confirm" type="object" class="oe_highlight"
+                            invisible="not show_confirm_btn"/>
+
+                    <button name="action_expire" string="Mark Expired" type="object" class="oe_highlight"
+                            invisible="not show_expire_btn"/>
+
+                    <button name="action_renew" string="Renew" type="object" class="oe_highlight"
+                            invisible="not show_renew_btn"/>
+
+                    <button name="action_cancel" string="Cancel" type="object" class="oe_highlight"
+                            invisible="not show_cancel_btn"/>
+
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="tenant_id"/>
+                            <field name="unit_id"/>
+                            <field name="property_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="monthly_rent"/>
+                            <field name="deposit"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="payment_term"/>
+                            <field name="payment_day"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Payments">
+                            <field name="payment_ids" context="{'default_tenant_id': id}">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="amount"/>
+                                    <field name="due_date"/>
+                                    <field name="payment_date"/>
+                                    <field name="state"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_estate_lease" model="ir.actions.act_window">
+        <field name="name">Leases</field>
+        <field name="res_model">estate.lease</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

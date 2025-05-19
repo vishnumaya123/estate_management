@@ -1,0 +1,91 @@
+<odoo>
+    <record id="view_estate_maintenance_tree" model="ir.ui.view">
+        <field name="name">estate.maintenance.tree</field>
+        <field name="model">estate.maintenance</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="unit_id"/>
+                <field name="tenant_id"/>
+                <field name="request_date"/>
+                <field name="priority"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_estate_maintenance_form" model="ir.ui.view">
+        <field name="name">estate.maintenance.form</field>
+        <field name="model">estate.maintenance</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- Hidden fields used for controlling button visibility -->
+                    <field name="show_assign_btn" invisible="1"/>
+                    <field name="show_start_btn" invisible="1"/>
+                    <field name="show_complete_btn" invisible="1"/>
+                    <field name="show_cancel_btn" invisible="1"/>
+
+                    <button name="action_assign"
+                            string="Assign"
+                            type="object"
+                            class="oe_highlight"
+                            invisible="not show_assign_btn"/>
+
+                    <button name="action_start"
+                            string="Start Work"
+                            type="object"
+                            class="oe_highlight"
+                            invisible="not show_start_btn"/>
+
+                    <button name="action_complete"
+                            string="Complete"
+                            type="object"
+                            class="oe_highlight"
+                            invisible="not show_complete_btn"/>
+
+                    <button name="action_cancel"
+                            string="Cancel"
+                            type="object"
+                            class="oe_highlight"
+                            invisible="not show_cancel_btn"/>
+
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="unit_id"/>
+                            <field name="property_id"/>
+                            <field name="lease_id"/>
+                            <field name="tenant_id"/>
+                        </group>
+                        <group>
+                            <field name="request_date"/>
+                            <field name="completion_date"/>
+                            <field name="priority"/>
+                            <field name="assigned_to"/>
+                        </group>
+                    </group>
+                    <field name="description"/>
+                    <notebook>
+                        <page string="Costs">
+                            <field name="cost"/>
+                            <field name="actual_cost"/>
+                        </page>
+                        <page string="Notes">
+                            <field name="notes"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_estate_maintenance" model="ir.actions.act_window">
+        <field name="name">Maintenance Requests</field>
+        <field name="res_model">estate.maintenance</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
